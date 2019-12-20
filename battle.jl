@@ -1,10 +1,8 @@
 using  Discord
-import Base: *
 include("boss.jl")
 include("base.jl")
 
-*(bool::Bool,str::String) = bool ? str : ""
-*(str::String,bool::Bool) = bool ? str : ""
+
 
 
 
@@ -52,8 +50,8 @@ function battle(client::Client,m::Discord.Message;lap=1,boss_number=1)
         return reply(client,m,"予約確認板の登録が完了しておりません．`.set`コマンドにて初期設定を完了させてください")
     end
 
-    if boss_number > 5
-        return reply(client,m,"不正な入力です．[ボス番号:$(boss_number)は5以下である必要があります]")
+    if boss_number > 5 || boss_number < 1
+        return reply(client,m,"不正な入力です．[ボス番号:$(boss_number)は1から5である必要があります]")
     end
 
     management_dict[channel_id_str]["lap"] = lap #周回数

@@ -7,6 +7,7 @@ include("attack.jl")
 include("fin.jl")
 include("la.jl")
 include("adjust.jl")
+include("cancel.jl")
 
 # Create a client.
 c = Client(TOKEN,prefix=".")
@@ -100,6 +101,14 @@ function set_command(c::Client,m::Message,argument)
         if length(argument_list) == 2
             if isdecimal(argument_list[2])
                 return adjust(c,m,int(argument_list[2]))
+            end
+        end
+
+    elseif argument_list[1] == ".cancel" || argument_list[1] == ".キャンセル"
+        @show now(),m.author.username,new_argument
+        if length(argument_list) == 2
+            if isdecimal(argument_list[2])
+                return cancel(c,m,int(argument_list[2]))
             end
         end
     end

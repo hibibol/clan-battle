@@ -1,5 +1,6 @@
 using JSON
 using Dates
+import Base: *
 using TimeZones
 
 include("boss.jl")
@@ -8,6 +9,9 @@ const management_json_file_name ="management.json"
 f = open(management_json_file_name,"r")
 management_dict = JSON.parse(f)
 close(f)
+
+*(bool::Bool,str::String) = bool ? str : ""
+*(str::String,bool::Bool) = bool ? str : ""
 
 function isdecimal(arg)
     try

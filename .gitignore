@@ -2,3 +2,4 @@
 token.jl
 management.json
 *.pdf
+*.pem
